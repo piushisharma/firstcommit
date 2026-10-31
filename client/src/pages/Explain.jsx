@@ -1,4 +1,4 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import Window from '../components/Window.jsx';
@@ -102,6 +102,7 @@ function RepoChat({ owner, repo }) {
 
 export default function Explain() {
   const { owner, repo } = useParams();
+  const navigate = useNavigate();
   const { data, isLoading, isError, error, refetch } = useRepoAnalysis(owner, repo);
 
   if (isLoading) {
@@ -158,7 +159,7 @@ export default function Explain() {
           </Button>
           <Button
             size="sm"
-            onClick={() => window.location.href = `/explore/${owner}/${repo}`}
+            onClick={() => navigate(`/explore/${owner}/${repo}`)}
           >
             Explore Files
           </Button>
@@ -245,10 +246,10 @@ export default function Explain() {
 
       {/* CTA row */}
       <div className={styles.ctaRow}>
-        <Button onClick={() => window.location.href = `/setup/${owner}/${repo}`} size="lg">
+        <Button onClick={() => navigate(`/setup/${owner}/${repo}`)} size="lg">
           Setup Guide →
         </Button>
-        <Button onClick={() => window.location.href = `/issues`} variant="secondary" size="lg">
+        <Button onClick={() => navigate('/issues')} variant="secondary" size="lg">
           Find Issues
         </Button>
       </div>

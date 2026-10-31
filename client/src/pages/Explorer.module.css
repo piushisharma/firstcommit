@@ -4,6 +4,21 @@
   gap: var(--sp-4);
 }
 
+.breadcrumb {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.breadcrumb a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: var(--maroon);
+}
+
 .pageTitle {
   font-family: var(--font-mono);
   font-size: 1.1rem;

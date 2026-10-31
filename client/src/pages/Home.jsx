@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import Window from '../components/Window.jsx';
 import Button from '../components/Button.jsx';
@@ -158,7 +158,7 @@ $ npm install
 
           {issuesError && (
             <p className={styles.issuesFallback}>
-              Could not load issues right now. <a href="/issues">Browse manually →</a>
+              Could not load issues right now. <Link to="/issues">Browse manually →</Link>
             </p>
           )}
 

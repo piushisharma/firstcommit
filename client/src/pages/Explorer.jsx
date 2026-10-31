@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import Window from '../components/Window.jsx';
 import Skeleton from '../components/Skeleton.jsx';
@@ -8,9 +8,9 @@ import DifficultyBadge from '../components/DifficultyBadge.jsx';
 import { api } from '../lib/api.js';
 import styles from './Explorer.module.css';
 
-function buildTree(items) {
+function buildTree(items = []) {
   const root = {};
-  items.forEach(item => {
+  (items || []).forEach(item => {
     const parts = item.path.split('/');
     let node = root;
     parts.forEach((part, i) => {
@@ -97,13 +97,25 @@ export default function Explorer() {
   const { owner, repo } = useParams();
   const [selectedPath, setSelectedPath] = useState(null);
 
-  const { data: treeData, isLoading: treeLoading, isError: treeError } = useQuery({
+  const {
+    data: treeData,
+    isLoading: treeLoading,
+    isError: isTreeError,
+    error: treeError,
+    refetch: refetchTree,
+  } = useQuery({
     queryKey: ['tree', owner, repo],
     queryFn: () => api.getTree(owner, repo),
     staleTime: 15 * 60 * 1000,
   });
 
-  const { data: fileData, isLoading: fileLoading, isError: fileError } = useQuery({
+  const {
+    data: fileData,
+    isLoading: fileLoading,
+    isError: isFileError,
+    error: fileError,
+    refetch: refetchFile,
+  } = useQuery({
     queryKey: ['file', owner, repo, selectedPath],
     queryFn: () => api.getFile(owner, repo, selectedPath),
     enabled: !!selectedPath,
@@ -112,6 +124,15 @@ export default function Explorer() {
 
   return (
     <div className={styles.page}>
+      {/* Breadcrumb */}
+      <nav className={styles.breadcrumb} aria-label="Breadcrumb">
+        <Link to="/">Home</Link>
+        <span aria-hidden="true"> › </span>
+        <Link to={`/explain/${owner}/${repo}`}>{owner}/{repo}</Link>
+        <span aria-hidden="true"> › </span>
+        <span>File Explorer</span>
+      </nav>
+
       <h1 className={styles.pageTitle}>{owner}/{repo} — File Explorer</h1>
 
       <div className={styles.layout}>
@@ -130,15 +151,19 @@ export default function Explorer() {
             </div>
           )}
 
-          {treeError && (
+          {isTreeError && (
             <div className={styles.treePad}>
-              <ErrorState code="DEFAULT" message="Could not load file tree." />
+              <ErrorState
+                code={treeError?.code || 'DEFAULT'}
+                message={treeError?.message || 'Could not load file tree.'}
+                onRetry={refetchTree}
+              />
             </div>
           )}
 
           {treeData && (
             <FileTree
-              items={treeData.items}
+              items={treeData.items || []}
               onSelect={setSelectedPath}
               selectedPath={selectedPath}
             />
@@ -166,9 +191,13 @@ export default function Explorer() {
             </Window>
           )}
 
-          {selectedPath && fileError && (
+          {selectedPath && isFileError && (
             <Window title={selectedPath || 'error.txt'}>
-              <ErrorState code="FILE_NOT_FOUND" message="Could not load this file." />
+              <ErrorState
+                code={fileError?.code || 'FILE_NOT_FOUND'}
+                message={fileError?.message || 'Could not load this file.'}
+                onRetry={refetchFile}
+              />
             </Window>
           )}
 

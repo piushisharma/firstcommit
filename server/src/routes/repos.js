@@ -41,7 +41,9 @@ router.get(
     repo:  z.string().regex(/^[a-zA-Z0-9_.-]+$/).max(100),
   }), 'params'),
   validate(z.object({
-    path: z.string().max(500).regex(/^[^.]{0}[a-zA-Z0-9/_.-]+$/),
+    path: z.string().min(1).max(500).refine(p => !p.includes('..') && !p.startsWith('/'), {
+      message: 'Invalid file path',
+    }),
   }), 'query'),
   getFileExplanation
 );

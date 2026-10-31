@@ -95,25 +95,33 @@ export async function getRepoTree(owner, repo, ref) {
   const cached = await cacheGet(key);
   if (cached) return cached;
 
-  // Get default branch sha
   const repoData = await getRepo(owner, repo);
-  const branch = ref || repoData.defaultBranch;
+  const branch = ref || repoData.defaultBranch || 'HEAD';
 
-  const { data: refData } = await getOctokit().git.getRef({
-    owner, repo, ref: `heads/${branch}`,
-  });
-  const sha = refData.object.sha;
-
-  const { data } = await getOctokit().git.getTree({
-    owner, repo, tree_sha: sha, recursive: 'true',
-  });
+  // GitHub getTree accepts branch name, commit sha, or 'HEAD' directly as tree_sha
+  let data;
+  try {
+    const res = await getOctokit().git.getTree({
+      owner, repo, tree_sha: branch, recursive: 'true',
+    });
+    data = res.data;
+  } catch (err) {
+    if (branch !== 'HEAD') {
+      const res = await getOctokit().git.getTree({
+        owner, repo, tree_sha: 'HEAD', recursive: 'true',
+      });
+      data = res.data;
+    } else {
+      throw err;
+    }
+  }
 
   const items = (data.tree || [])
     .filter(i => i.type === 'blob')
     .slice(0, MAX_TREE_ITEMS)
     .map(i => ({ path: i.path, size: i.size || 0, sha: i.sha }));
 
-  const result = { sha, items, truncated: data.truncated };
+  const result = { sha: data.sha, items, truncated: data.truncated };
   await cacheSet(key, result, 15 * 60 * 1000); // 15 min
   return result;
 }
