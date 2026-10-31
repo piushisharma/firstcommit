@@ -150,3 +150,5 @@ npm test
 - GitHub unauthenticated rate limits apply if `GITHUB_TOKEN` is not supplied.
 - Extremely large repositories (> 5,000 files) will have their file tree truncated at 500 items for responsive performance.
 
+---
+
