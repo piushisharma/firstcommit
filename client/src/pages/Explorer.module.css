@@ -1,0 +1,152 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.pageTitle {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  color: var(--maroon);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--sp-5);
+  align-items: start;
+}
+
+/* File tree */
+.treeWindow {
+  position: sticky;
+  top: 68px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+.treeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-3) var(--sp-3);
+  border-bottom: 1px solid var(--shadow);
+  background: var(--bar);
+}
+
+.treeHeaderText {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--maroon);
+}
+
+.treeWarning {
+  font-size: 0.65rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.treePad {
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.tree {
+  list-style: none;
+  padding: var(--sp-2) 0;
+}
+
+.treeChildren {
+  list-style: none;
+}
+
+.treeDir,
+.treeFile {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 5px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text);
+  transition: background var(--transition);
+  border-radius: 0;
+}
+
+.treeDir:hover,
+.treeFile:hover {
+  background: var(--bar);
+}
+
+.treeFile.selected {
+  background: var(--pink-desktop);
+  color: var(--maroon);
+  font-weight: 700;
+}
+
+.treeName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Detail pane */
+.detail {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-8) var(--sp-5);
+  text-align: center;
+  color: var(--muted);
+}
+
+.emptyIcon {
+  font-size: 2rem;
+}
+
+/* Explanation */
+.explanation { display: flex; flex-direction: column; gap: var(--sp-4); }
+.explHeader { display: flex; align-items: center; gap: var(--sp-3); }
+.explTitle { font-family: var(--font-headline); font-size: 1.1rem; color: var(--maroon); }
+.explText { font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+.explSection { display: flex; flex-direction: column; gap: var(--sp-2); }
+.explSubheading { font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; color: var(--maroon); }
+.partsList { list-style: none; display: flex; flex-direction: column; gap: var(--sp-2); }
+.partItem { display: flex; gap: var(--sp-3); align-items: baseline; font-size: 0.875rem; }
+.partName { font-family: var(--font-mono); font-size: 0.78rem; color: var(--maroon); flex-shrink: 0; }
+.tipBox { background: var(--folder-ice); border: 1px solid var(--shadow); border-radius: var(--radius-sm); padding: var(--sp-3) var(--sp-4); font-size: 0.85rem; }
+.tipBox ul { padding-left: var(--sp-4); margin-top: var(--sp-2); display: flex; flex-direction: column; gap: var(--sp-1); }
+.noExpl { color: var(--muted); font-size: 0.875rem; }
+
+/* Code */
+.codeBlock {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  white-space: pre;
+  color: var(--text);
+  max-height: 500px;
+  padding: 0;
+}
+
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }
+  .treeWindow { position: static; max-height: 300px; }
+}
+

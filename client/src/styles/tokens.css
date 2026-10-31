@@ -1,0 +1,58 @@
+/* ─── Design Tokens ──────────────────────────────────────────────────────── */
+:root {
+  /* Colors */
+  --pink-desktop: #FFC1D5;
+  --window:       #FFFFFF;
+  --bar:          #FFF3F6;
+  --maroon:       #7A2E3F;
+  --text:         #5A2A35;
+  --muted:        #8A5563;
+  --shadow:       #E79BB3;
+
+  /* Folder tints */
+  --folder-white: #FFFFFF;
+  --folder-ice:   #E3F3FF;
+  --folder-peach: #FFE2B5;
+  --folder-blush: #FFE4E6;
+  --folder-sand:  #EAD9C2;
+
+  /* Difficulty badges */
+  --badge-easy:   #D8F5E3;
+  --badge-medium: #FFE2B5;
+  --badge-hard:   #FFD0D8;
+
+  /* Fonts */
+  --font-headline: 'Lora', Georgia, serif;
+  --font-body:     'Inter', system-ui, sans-serif;
+  --font-mono:     'Space Mono', 'Courier New', monospace;
+  --font-ui:       'Silkscreen', monospace;
+
+  /* Spacing (8px base) */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  24px;
+  --sp-6:  32px;
+  --sp-7:  40px;
+  --sp-8:  48px;
+  --sp-9:  64px;
+  --sp-10: 80px;
+
+  /* Borders */
+  --border: 2px solid var(--maroon);
+  --radius-sm: 4px;
+  --radius-md: 10px;
+
+  /* Shadows */
+  --win-shadow: 6px 6px 0 var(--shadow);
+  --btn-shadow: 3px 3px 0 var(--shadow);
+
+  /* Layout */
+  --max-width: 1200px;
+  --window-pad: 32px;
+  --window-pad-mobile: 16px;
+
+  /* Transitions */
+  --transition: 150ms ease;
+}

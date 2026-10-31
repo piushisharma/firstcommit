@@ -1,0 +1,28 @@
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--maroon);
+  color: var(--window);
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  border: var(--border);
+  box-shadow: var(--btn-shadow);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .toast { transition: none; }
+}
+

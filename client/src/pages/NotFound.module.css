@@ -1,0 +1,39 @@
+.page {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--sp-9);
+}
+
+.window {
+  max-width: 480px;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-6) 0;
+  text-align: center;
+}
+
+.code {
+  font-family: var(--font-mono);
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--shadow);
+  line-height: 1;
+}
+
+.heading {
+  font-family: var(--font-headline);
+  font-size: 1.5rem;
+  color: var(--maroon);
+}
+
+.message {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+

@@ -1,0 +1,107 @@
+.window {
+  background: var(--window);
+  border: var(--border);
+  box-shadow: var(--win-shadow);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow var(--transition), transform var(--transition);
+  position: relative;
+}
+
+.window:hover {
+  box-shadow: 8px 8px 0 var(--shadow);
+}
+
+.window.dragging {
+  box-shadow: 12px 12px 0 var(--shadow);
+  cursor: grabbing;
+  user-select: none;
+}
+
+.minimized .body {
+  display: none;
+}
+
+/* Title bar */
+.titleBar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 6px 8px;
+  background: var(--bar);
+  border-bottom: var(--border);
+  cursor: grab;
+  user-select: none;
+}
+
+.titleBar:active {
+  cursor: grabbing;
+}
+
+.checkbox,
+.closeBtn {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--window);
+  border: 1.5px solid var(--maroon);
+  border-radius: 2px;
+  color: var(--maroon);
+  cursor: pointer;
+  padding: 0;
+  transition: background var(--transition);
+}
+
+.checkbox:hover,
+.closeBtn:hover {
+  background: var(--pink-desktop);
+}
+
+.titleWrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  overflow: hidden;
+  min-width: 0;
+}
+
+.titleLine {
+  flex: 1;
+  height: 2px;
+  background: var(--maroon);
+}
+
+.titleText {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--maroon);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 var(--sp-2);
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+}
+
+/* Body */
+.body {
+  padding: var(--window-pad);
+  flex: 1;
+}
+
+.noPad .body,
+.body.noPad {
+  padding: 0;
+}
+
+@media (max-width: 640px) {
+  .body {
+    padding: var(--window-pad-mobile);
+  }
+}
+

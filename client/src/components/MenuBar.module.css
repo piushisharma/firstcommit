@@ -1,0 +1,126 @@
+.bar {
+  background: var(--bar);
+  border-bottom: var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--sp-5);
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+}
+
+.logo {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--maroon);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  flex-shrink: 0;
+}
+
+.logo:hover {
+  color: var(--text);
+}
+
+.navList {
+  display: flex;
+  list-style: none;
+  gap: 0;
+  flex: 1;
+}
+
+.navItem {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--maroon);
+  text-decoration: none;
+  padding: 4px 12px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  transition: background var(--transition), color var(--transition);
+  border-right: 1px solid var(--shadow);
+  letter-spacing: 0.03em;
+}
+
+.navItem:hover,
+.navItem.active {
+  background: var(--maroon);
+  color: var(--window);
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-left: auto;
+}
+
+.dashBtn {
+  font-family: var(--font-ui);
+  font-size: 0.7rem;
+  color: var(--maroon);
+  text-decoration: none;
+  border: 1.5px solid var(--maroon);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition), color var(--transition);
+}
+
+.dashBtn:hover {
+  background: var(--maroon);
+  color: var(--window);
+  text-decoration: none;
+}
+
+.burger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--maroon);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+}
+
+/* Mobile */
+.mobileMenu {
+  display: flex;
+  flex-direction: column;
+  background: var(--bar);
+  border-top: var(--border);
+  padding: var(--sp-2) 0;
+}
+
+.mobileItem {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--maroon);
+  text-decoration: none;
+  padding: var(--sp-3) var(--sp-5);
+  transition: background var(--transition);
+}
+
+.mobileItem:hover,
+.mobileItem.active {
+  background: var(--pink-desktop);
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .navList { display: none; }
+  .dashBtn { display: none; }
+  .burger  { display: flex; }
+}
+
