@@ -13,7 +13,7 @@ export function createApp() {
 
   // CORS
   app.use(cors({
-    origin: process.env.CLIENT_ORIGIN || 'http://localhost:5173',
+    origin: process.env.CLIENT_ORIGIN ? [process.env.CLIENT_ORIGIN, 'http://localhost:5173'] : true,
     methods: ['GET', 'POST', 'PATCH', 'DELETE'],
     credentials: true,
   }));
@@ -22,13 +22,13 @@ export function createApp() {
   app.use(express.json({ limit: '1mb' }));
 
   // Global rate limiting
-  app.use('/api/', globalRateLimit);
+  app.use(['/api/', '/'], globalRateLimit);
 
-  // Routes
-  app.use('/api/v1', routes);
+  // Routes - support both /api/v1 and /v1 prefixes
+  app.use(['/api/v1', '/v1'], routes);
 
-  // Health check (outside versioned routes for convenience)
-  app.get('/api/health', (_req, res) => res.json({ status: 'ok', ts: Date.now() }));
+  // Health check
+  app.get(['/api/health', '/health'], (_req, res) => res.json({ status: 'ok', ts: Date.now() }));
 
   // Centralized error handler (must be last)
   app.use(errorHandler);
